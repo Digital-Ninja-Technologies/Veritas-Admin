@@ -1,6 +1,7 @@
 import {
   disputes,
   escrows,
+  faqs,
   milestones,
   supportMessages,
   supportTickets,
@@ -11,6 +12,7 @@ import {
 import type {
   Dispute,
   Escrow,
+  FaqEntry,
   Milestone,
   SupportMessage,
   SupportTicket,
@@ -34,6 +36,7 @@ class MockStore {
   transactions: Transaction[] = structuredClone(transactions);
   supportTickets: SupportTicket[] = structuredClone(supportTickets);
   supportMessages: SupportMessage[] = structuredClone(supportMessages);
+  faqs: FaqEntry[] = structuredClone(faqs);
 }
 
 declare global {

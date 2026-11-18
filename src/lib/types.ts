@@ -148,6 +148,15 @@ export interface SupportTicket {
   updated_at: string;
 }
 
+export interface FaqEntry {
+  id: string;
+  category: SupportTicketCategory;
+  question: string;
+  answer: string;
+  created_at: string;
+  updated_at: string;
+}
+
 /**
  * View-model shapes the dashboard actually renders — denormalized with
  * party names so list/detail pages don't need N+1 user lookups. The mock

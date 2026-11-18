@@ -1,6 +1,7 @@
 import type {
   Dispute,
   Escrow,
+  FaqEntry,
   Milestone,
   SupportMessage,
   SupportTicket,
@@ -465,4 +466,87 @@ export const supportMessages: SupportMessage[] = [
       daysAgoSent: 33,
     },
   ]),
+];
+
+function faqEntry(
+  n: number,
+  category: FaqEntry["category"],
+  question: string,
+  answer: string,
+  updatedDaysAgo: number,
+): FaqEntry {
+  return {
+    id: uid("faq", n),
+    category,
+    question,
+    answer,
+    created_at: daysAgo(updatedDaysAgo + 30),
+    updated_at: daysAgo(updatedDaysAgo),
+  };
+}
+
+export const faqs: FaqEntry[] = [
+  faqEntry(
+    1,
+    "escrow",
+    "How does Veritas escrow work?",
+    "A client funds an escrow for the agreed amount, work happens in milestones, and funds for each milestone are released to the freelancer once the client approves the delivery. Money only moves when both sides agree, or when an admin resolves a dispute.",
+    10,
+  ),
+  faqEntry(
+    2,
+    "escrow",
+    "When are funds released to the freelancer?",
+    "As soon as a client approves a milestone delivery, that milestone's funds are released to the freelancer's wallet immediately — there's no additional waiting period.",
+    10,
+  ),
+  faqEntry(
+    3,
+    "payment",
+    "What payment methods does Veritas support?",
+    "Escrows can be funded in Naira via bank transfer to a dedicated virtual account, or in crypto via an on-chain deposit address. Both are shown on the escrow's funding screen once it's created.",
+    8,
+  ),
+  faqEntry(
+    4,
+    "payment",
+    "How long do wallet withdrawals take?",
+    "Withdrawals to a verified bank account are usually processed within a few hours, and almost always same-day. Occasional delays can happen during bank settlement windows — our team monitors these and follows up if a payout takes longer than 24 hours.",
+    6,
+  ),
+  faqEntry(
+    5,
+    "account",
+    "How do I verify my bank account?",
+    "Go to Wallet settings and submit your BVN along with the bank account you want to use for withdrawals. Verification is usually instant; if it's stuck for more than a few minutes, reach out and we'll check it manually.",
+    4,
+  ),
+  faqEntry(
+    6,
+    "account",
+    "Can I change the email address on my account?",
+    "Not yet as a self-serve option — contact support with your old and new email addresses and we'll update it for you.",
+    3,
+  ),
+  faqEntry(
+    7,
+    "dispute",
+    "What happens if I raise a dispute on an escrow?",
+    "The escrow is frozen (no further releases) and an admin reviews the milestone history, delivery notes, and both parties' messages. Most disputes are resolved within 2–3 business days with one of three outcomes: release to the freelancer, refund to the client, or a 50/50 split.",
+    5,
+  ),
+  faqEntry(
+    8,
+    "dispute",
+    "Can I add more context after I've raised a dispute?",
+    "Yes — reply on the support ticket linked to your dispute with any extra context, screenshots, or messages, and it'll be reviewed before a decision is made.",
+    5,
+  ),
+  faqEntry(
+    9,
+    "other",
+    "Is there a mobile app?",
+    "Yes, Veritas is available on iOS and Android. This admin dashboard is a separate, internal tool for the Veritas team only.",
+    12,
+  ),
 ];
