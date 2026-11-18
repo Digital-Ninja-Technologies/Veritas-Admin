@@ -1,5 +1,23 @@
-import { disputes, escrows, milestones, transactions, users, wallets } from "./seed";
-import type { Dispute, Escrow, Milestone, Transaction, User, Wallet } from "@/lib/types";
+import {
+  disputes,
+  escrows,
+  milestones,
+  supportMessages,
+  supportTickets,
+  transactions,
+  users,
+  wallets,
+} from "./seed";
+import type {
+  Dispute,
+  Escrow,
+  Milestone,
+  SupportMessage,
+  SupportTicket,
+  Transaction,
+  User,
+  Wallet,
+} from "@/lib/types";
 
 /**
  * Mutable in-memory store seeded from `seed.ts`. Stands in for the
@@ -14,6 +32,8 @@ class MockStore {
   milestones: Milestone[] = structuredClone(milestones);
   disputes: Dispute[] = structuredClone(disputes);
   transactions: Transaction[] = structuredClone(transactions);
+  supportTickets: SupportTicket[] = structuredClone(supportTickets);
+  supportMessages: SupportMessage[] = structuredClone(supportMessages);
 }
 
 declare global {

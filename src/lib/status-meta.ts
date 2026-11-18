@@ -1,4 +1,4 @@
-import type { DisputeStatus, EscrowStatus, MilestoneStatus, TxType } from "@/lib/types";
+import type { DisputeStatus, EscrowStatus, MilestoneStatus, SupportTicketStatus, TxType } from "@/lib/types";
 
 export type BadgeTone = "success" | "warning" | "info" | "destructive" | "secondary";
 
@@ -25,6 +25,12 @@ export const disputeStatusTone: Record<DisputeStatus, BadgeTone> = {
   open: "destructive",
   reviewing: "warning",
   resolved: "success",
+};
+
+export const supportStatusTone: Record<SupportTicketStatus, BadgeTone> = {
+  open: "destructive",
+  pending: "warning",
+  closed: "success",
 };
 
 export const txTypeTone: Record<TxType, BadgeTone> = {

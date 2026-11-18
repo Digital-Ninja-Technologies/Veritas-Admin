@@ -2,6 +2,8 @@ import type {
   Dispute,
   Escrow,
   Milestone,
+  SupportMessage,
+  SupportTicket,
   Transaction,
   User,
   Wallet,
@@ -312,3 +314,155 @@ const activityTxns: Transaction[] = [
 export const transactions: Transaction[] = [...activityTxns].sort(
   (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime(),
 );
+
+function ticketMessages(
+  ticketId: string,
+  userId: string,
+  thread: Array<{ from: "user" | "admin"; body: string; daysAgoSent: number }>,
+): SupportMessage[] {
+  return thread.map((m, i) => ({
+    id: uid(`${ticketId}-msg`, i + 1),
+    ticket_id: ticketId,
+    sender_id: m.from === "admin" ? "usr-admin" : userId,
+    sender_role: m.from,
+    body: m.body,
+    created_at: daysAgo(m.daysAgoSent),
+  }));
+}
+
+export const supportTickets: SupportTicket[] = [
+  {
+    id: uid("tkt", 1),
+    user_id: uid("usr", 5),
+    subject: "Can't verify my bank account",
+    category: "payment",
+    status: "open",
+    created_at: daysAgo(1),
+    updated_at: daysAgo(1),
+  },
+  {
+    id: uid("tkt", 2),
+    user_id: uid("usr", 3),
+    subject: "Escrow funds not showing in my wallet",
+    category: "escrow",
+    status: "pending",
+    created_at: daysAgo(4),
+    updated_at: daysAgo(2),
+  },
+  {
+    id: uid("tkt", 3),
+    user_id: uid("usr", 9),
+    subject: "How do I change my account email address?",
+    category: "account",
+    status: "pending",
+    created_at: daysAgo(6),
+    updated_at: daysAgo(3),
+  },
+  {
+    id: uid("tkt", 4),
+    user_id: uid("usr", 6),
+    subject: "Payout took longer than expected",
+    category: "payment",
+    status: "closed",
+    created_at: daysAgo(20),
+    updated_at: daysAgo(17),
+  },
+  {
+    id: uid("tkt", 5),
+    user_id: uid("usr", 8),
+    subject: "Question about how the dispute process works",
+    category: "dispute",
+    status: "open",
+    created_at: daysAgo(0),
+    updated_at: daysAgo(0),
+  },
+  {
+    id: uid("tkt", 6),
+    user_id: uid("usr", 2),
+    subject: "App crashes when uploading delivery files",
+    category: "other",
+    status: "closed",
+    created_at: daysAgo(35),
+    updated_at: daysAgo(33),
+  },
+];
+
+export const supportMessages: SupportMessage[] = [
+  ...ticketMessages(uid("tkt", 1), uid("usr", 5), [
+    {
+      from: "user",
+      body: "I've uploaded my BVN and bank details twice now but my wallet still says 'unverified'. Can someone check what's going on?",
+      daysAgoSent: 1,
+    },
+  ]),
+  ...ticketMessages(uid("tkt", 2), uid("usr", 3), [
+    {
+      from: "user",
+      body: "I funded the Illustration Set escrow 2 days ago but I don't see it reflected anywhere on my side. Is this expected?",
+      daysAgoSent: 4,
+    },
+    {
+      from: "admin",
+      body: "Thanks for flagging this — funded escrow balances show on the escrow detail page, not the wallet (your wallet only tracks direct top-ups/withdrawals). I've double-checked and your deposit went through fine. Let me know if that clears it up.",
+      daysAgoSent: 2,
+    },
+  ]),
+  ...ticketMessages(uid("tkt", 3), uid("usr", 9), [
+    {
+      from: "user",
+      body: "I need to switch my account email from my old work address to a personal one. Where do I do that?",
+      daysAgoSent: 6,
+    },
+    {
+      from: "admin",
+      body: "We don't have self-serve email changes yet — I can update it for you here. What's the new email address you'd like on file?",
+      daysAgoSent: 5,
+    },
+    {
+      from: "user",
+      body: "Thanks! It's ifeoma.c.personal@gmail.com — appreciate the quick help.",
+      daysAgoSent: 3,
+    },
+  ]),
+  ...ticketMessages(uid("tkt", 4), uid("usr", 6), [
+    {
+      from: "user",
+      body: "My payout for the Copywriting Sprint refund was marked successful 3 days ago but I still haven't seen it land.",
+      daysAgoSent: 20,
+    },
+    {
+      from: "admin",
+      body: "Sorry about the delay — this was held up on Providus Bank's end during a settlement window. I've confirmed with Nomba that it's cleared now.",
+      daysAgoSent: 18,
+    },
+    {
+      from: "user",
+      body: "Confirmed, it landed this morning. Thanks for sorting it out.",
+      daysAgoSent: 17,
+    },
+  ]),
+  ...ticketMessages(uid("tkt", 5), uid("usr", 8), [
+    {
+      from: "user",
+      body: "If a dispute gets raised on one of my escrows, how long does resolution usually take, and can I add more evidence after the initial reason is submitted?",
+      daysAgoSent: 0,
+    },
+  ]),
+  ...ticketMessages(uid("tkt", 6), uid("usr", 2), [
+    {
+      from: "user",
+      body: "The app crashes every time I try to attach a delivery file over ~15MB on the milestone delivery screen.",
+      daysAgoSent: 35,
+    },
+    {
+      from: "admin",
+      body: "Thanks for the report — that's a known upload-size limit issue, fixed in the latest app version. Could you update and try again?",
+      daysAgoSent: 34,
+    },
+    {
+      from: "user",
+      body: "Updated and it works now, thank you!",
+      daysAgoSent: 33,
+    },
+  ]),
+];

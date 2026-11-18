@@ -125,6 +125,29 @@ export interface Dispute {
   resolved_at?: string;
 }
 
+export type SupportTicketStatus = "open" | "pending" | "closed";
+
+export type SupportTicketCategory = "escrow" | "payment" | "account" | "dispute" | "other";
+
+export interface SupportMessage {
+  id: string;
+  ticket_id: string;
+  sender_id: string;
+  sender_role: UserRole;
+  body: string;
+  created_at: string;
+}
+
+export interface SupportTicket {
+  id: string;
+  user_id: string;
+  subject: string;
+  category: SupportTicketCategory;
+  status: SupportTicketStatus;
+  created_at: string;
+  updated_at: string;
+}
+
 /**
  * View-model shapes the dashboard actually renders — denormalized with
  * party names so list/detail pages don't need N+1 user lookups. The mock
@@ -154,4 +177,9 @@ export interface UserWithStats extends User {
   wallet_balance_kobo: number;
   escrows_as_client: number;
   escrows_as_freelancer: number;
+}
+
+export interface SupportTicketWithContext extends SupportTicket {
+  user: Pick<User, "id" | "full_name" | "email">;
+  messages: SupportMessage[];
 }

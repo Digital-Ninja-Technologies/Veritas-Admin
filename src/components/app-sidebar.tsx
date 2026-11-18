@@ -8,6 +8,7 @@ import {
   Gavel,
   Users,
   Receipt,
+  LifeBuoy,
   LogOut,
 } from "lucide-react";
 
@@ -31,6 +32,7 @@ const NAV_ITEMS = [
   { href: "/disputes", label: "Disputes", icon: Gavel },
   { href: "/users", label: "Users", icon: Users },
   { href: "/transactions", label: "Transactions", icon: Receipt },
+  { href: "/support", label: "Support", icon: LifeBuoy },
 ];
 
 export function AppSidebar() {
