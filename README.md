@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Veritas Admin
 
-## Getting Started
+Internal admin dashboard for the [Veritas](https://www.useveritasapp.com) escrow platform. Gives the Veritas team visibility into escrows, disputes, users, and transactions, and a workflow for resolving disputes.
 
-First, run the development server:
+**Website:** [www.useveritasapp.com](https://www.useveritasapp.com)
+
+## Stack
+
+- [Next.js](https://nextjs.org) (App Router, Turbopack) + TypeScript
+- [Tailwind CSS v4](https://tailwindcss.com) + [shadcn/ui](https://ui.shadcn.com) (new-york-v4)
+- [Recharts](https://recharts.org) for charts
+- Server Actions for mutations, cookie-based mock session auth
+
+## Data
+
+This app currently runs on an in-memory mock data layer (`src/lib/mock`) seeded with representative Veritas data, shaped to match `veritas-backend`'s wire format (snake_case fields, amounts in kobo) so the `src/lib/data/*` functions can be swapped for real API calls later without touching the UI.
+
+## Features
+
+- **Overview** — platform-wide metrics, funded volume over time, escrow status breakdown, recent activity
+- **Escrows** — list and detail views across the full escrow lifecycle
+- **Disputes** — list, detail, and a resolution flow (release to freelancer, refund to client, or 50/50 split)
+- **Users** — list and detail views with escrow/transaction history
+- **Transactions** — platform-wide ledger with type filtering
+
+## Getting started
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Log in with the seeded admin account shown on the login page.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run build
+npm run start
+```

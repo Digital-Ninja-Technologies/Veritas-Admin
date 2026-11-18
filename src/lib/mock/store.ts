@@ -17,7 +17,6 @@ class MockStore {
 }
 
 declare global {
-  // eslint-disable-next-line no-var
   var __veritasMockStore: MockStore | undefined;
 }
 

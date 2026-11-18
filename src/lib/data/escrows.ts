@@ -28,6 +28,13 @@ export async function listEscrowTransactions(escrowId: string) {
   return store.transactions.filter((t) => t.escrow_id === escrowId);
 }
 
+export async function listEscrowsForUser(userId: string): Promise<EscrowWithParties[]> {
+  return store.escrows
+    .filter((e) => e.client_id === userId || e.freelancer_id === userId)
+    .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
+    .map(withParties);
+}
+
 export const ESCROW_STATUSES: EscrowStatus[] = [
   "pending",
   "funded",
