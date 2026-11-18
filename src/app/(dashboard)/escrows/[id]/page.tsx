@@ -60,32 +60,14 @@ export default async function EscrowDetailPage({ params }: { params: Promise<{ i
                       <StatusBadge status={m.status} tone={milestoneStatusTone[m.status]} />
                     </div>
                   </div>
-                  {m.delivery_note ? (
-                    <div className="mt-3 rounded-md bg-muted/60 p-3 text-sm">
-                      <p className="font-medium text-xs uppercase tracking-wide text-muted-foreground">
-                        Delivery note
-                      </p>
-                      <p className="mt-1">{m.delivery_note}</p>
-                      {m.delivery_link ? (
-                        <a
-                          href={m.delivery_link.startsWith("http") ? m.delivery_link : `https://${m.delivery_link}`}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="mt-1 inline-block text-blue-600 underline"
-                        >
-                          {m.delivery_link}
-                        </a>
-                      ) : null}
-                    </div>
-                  ) : null}
-                  {m.revision_note ? (
-                    <div className="mt-3 rounded-md bg-warning/60 p-3 text-sm">
-                      <p className="font-medium text-xs uppercase tracking-wide text-warning-foreground">
-                        Changes requested
-                      </p>
-                      <p className="mt-1">{m.revision_note}</p>
-                    </div>
-                  ) : null}
+                  {/*
+                    Deliberately not shown: delivery_note, delivery_link, and
+                    revision_note. That's the client/freelancer's private
+                    exchange about the actual work — deliverable URLs and
+                    feedback — which admins have no reason to see. The status
+                    badge above is enough operational signal (delivered,
+                    changes requested, approved, etc.).
+                  */}
                 </div>
               ))}
             </CardContent>
