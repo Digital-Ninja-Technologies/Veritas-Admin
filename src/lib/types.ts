@@ -7,7 +7,7 @@
  * Money is always in kobo (smallest NGN unit), matching the backend.
  */
 
-export type UserRole = "user" | "admin";
+export type UserRole = "user" | "admin" | "customer_care";
 
 export interface User {
   id: string;
@@ -16,6 +16,10 @@ export interface User {
   role: UserRole;
   phone: string;
   created_at: string;
+  /** Set for staff accounts (admin/customer_care); platform users don't have one. */
+  avatar_seed?: string;
+  /** Staff only — defaults to active when absent. */
+  is_active?: boolean;
 }
 
 export type EscrowStatus =
@@ -155,6 +159,18 @@ export interface FaqEntry {
   answer: string;
   created_at: string;
   updated_at: string;
+}
+
+export type InviteStatus = "pending" | "accepted" | "revoked";
+
+export interface TeamInvite {
+  id: string;
+  email: string;
+  token: string;
+  status: InviteStatus;
+  invited_by: string;
+  created_at: string;
+  accepted_at?: string;
 }
 
 /**

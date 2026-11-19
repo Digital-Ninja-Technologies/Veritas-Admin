@@ -3,8 +3,10 @@ import {
   escrows,
   faqs,
   milestones,
+  staffCredentials,
   supportMessages,
   supportTickets,
+  teamInvites,
   transactions,
   users,
   wallets,
@@ -16,6 +18,7 @@ import type {
   Milestone,
   SupportMessage,
   SupportTicket,
+  TeamInvite,
   Transaction,
   User,
   Wallet,
@@ -37,6 +40,8 @@ class MockStore {
   supportTickets: SupportTicket[] = structuredClone(supportTickets);
   supportMessages: SupportMessage[] = structuredClone(supportMessages);
   faqs: FaqEntry[] = structuredClone(faqs);
+  teamInvites: TeamInvite[] = structuredClone(teamInvites);
+  staffCredentials: { user_id: string; password: string }[] = structuredClone(staffCredentials);
 }
 
 declare global {

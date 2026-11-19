@@ -9,6 +9,7 @@ import {
   Users,
   Receipt,
   LifeBuoy,
+  UserCog,
   LogOut,
 } from "lucide-react";
 
@@ -25,18 +26,23 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { logoutAction } from "@/lib/auth/actions";
+import type { UserRole } from "@/lib/types";
 
-const NAV_ITEMS = [
+const SUPER_ADMIN_NAV = [
   { href: "/", label: "Overview", icon: LayoutDashboard },
   { href: "/escrows", label: "Escrows", icon: FileStack },
   { href: "/disputes", label: "Disputes", icon: Gavel },
   { href: "/users", label: "Users", icon: Users },
   { href: "/transactions", label: "Transactions", icon: Receipt },
   { href: "/support", label: "Support", icon: LifeBuoy },
+  { href: "/team", label: "Team", icon: UserCog },
 ];
 
-export function AppSidebar() {
+const CUSTOMER_CARE_NAV = [{ href: "/support", label: "Support", icon: LifeBuoy }];
+
+export function AppSidebar({ role }: { role: UserRole }) {
   const pathname = usePathname();
+  const navItems = role === "customer_care" ? CUSTOMER_CARE_NAV : SUPER_ADMIN_NAV;
 
   return (
     <Sidebar collapsible="icon">
@@ -56,7 +62,7 @@ export function AppSidebar() {
           <SidebarGroupLabel>Platform</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {NAV_ITEMS.map((item) => {
+              {navItems.map((item) => {
                 const isActive = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
                 return (
                   <SidebarMenuItem key={item.href}>

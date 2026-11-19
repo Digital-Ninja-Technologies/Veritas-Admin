@@ -5,7 +5,7 @@ import { LogOut } from "lucide-react";
 
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Separator } from "@/components/ui/separator";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,7 +15,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { logoutAction } from "@/lib/auth/actions";
-import { MOCK_ADMIN } from "@/lib/auth/constants";
+import { avatarUrl } from "@/lib/avatars";
+import { initials } from "@/lib/format";
+import type { User } from "@/lib/types";
 
 const TITLES: Record<string, string> = {
   "/": "Overview",
@@ -23,6 +25,8 @@ const TITLES: Record<string, string> = {
   "/disputes": "Disputes",
   "/users": "Users",
   "/transactions": "Transactions",
+  "/support": "Support",
+  "/team": "Team",
 };
 
 function pageTitle(pathname: string): string {
@@ -31,8 +35,9 @@ function pageTitle(pathname: string): string {
   return TITLES[base] ?? "Veritas Admin";
 }
 
-export function SiteHeader() {
+export function SiteHeader({ user }: { user: User }) {
   const pathname = usePathname();
+  const roleLabel = user.role === "admin" ? "Super Admin" : "Customer Care";
 
   return (
     <header className="flex h-14 shrink-0 items-center gap-2 border-b bg-background">
@@ -45,15 +50,19 @@ export function SiteHeader() {
             <DropdownMenuTrigger asChild>
               <button className="flex items-center gap-2 rounded-full outline-none ring-ring/50 focus-visible:ring-2">
                 <Avatar className="size-8">
-                  <AvatarFallback className="bg-sidebar text-sidebar-foreground text-xs">VA</AvatarFallback>
+                  {user.avatar_seed ? <AvatarImage src={avatarUrl(user.avatar_seed)} alt="" /> : null}
+                  <AvatarFallback className="bg-sidebar text-xs text-sidebar-foreground">
+                    {initials(user.full_name)}
+                  </AvatarFallback>
                 </Avatar>
               </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-56">
               <DropdownMenuLabel className="font-normal">
                 <div className="flex flex-col gap-0.5">
-                  <span className="text-sm font-medium">{MOCK_ADMIN.full_name}</span>
-                  <span className="text-xs text-muted-foreground">{MOCK_ADMIN.email}</span>
+                  <span className="text-sm font-medium">{user.full_name}</span>
+                  <span className="text-xs text-muted-foreground">{user.email}</span>
+                  <span className="text-xs text-muted-foreground">{roleLabel}</span>
                 </div>
               </DropdownMenuLabel>
               <DropdownMenuSeparator />

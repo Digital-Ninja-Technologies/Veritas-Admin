@@ -51,6 +51,8 @@ export default function LoginPage() {
 
         <p className="mt-6 text-center text-xs text-muted-foreground">
           Demo credentials — admin@useveritasapp.com / veritas-admin-2026
+          <br />
+          Customer care demo — grace.adeyemi@useveritasapp.com / customercare-2026
         </p>
       </div>
     </div>

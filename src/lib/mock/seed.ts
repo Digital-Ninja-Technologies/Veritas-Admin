@@ -5,6 +5,7 @@ import type {
   Milestone,
   SupportMessage,
   SupportTicket,
+  TeamInvite,
   Transaction,
   User,
   Wallet,
@@ -43,7 +44,24 @@ export const users: User[] = [
   { id: uid("usr", 7), email: "priya@sharmadigital.com", full_name: "Priya Sharma", role: "user", phone: "+234 816 905 3317", created_at: daysAgo(95) },
   { id: uid("usr", 8), email: "tunde@vertexlabs.ng", full_name: "Tunde Bakare", role: "user", phone: "+234 705 441 8863", created_at: daysAgo(60) },
   { id: uid("usr", 9), email: "ifeoma@brightworks.ng", full_name: "Ifeoma Chukwu", role: "user", phone: "+234 802 773 1145", created_at: daysAgo(30) },
-  { id: "usr-admin", email: "admin@useveritasapp.com", full_name: "Veritas Admin", role: "admin", phone: "+234 800 000 0000", created_at: daysAgo(400) },
+  { id: "usr-admin", email: "admin@useveritasapp.com", full_name: "Veritas Admin", role: "admin", phone: "+234 800 000 0000", created_at: daysAgo(400), avatar_seed: "Segun", is_active: true },
+  { id: "usr-cc-1", email: "grace.adeyemi@useveritasapp.com", full_name: "Grace Adeyemi", role: "customer_care", phone: "+234 806 221 9087", created_at: daysAgo(45), avatar_seed: "Ngozi", is_active: true },
+];
+
+/** Mock-only — plaintext is fine here since this is a front-end-only demo layer, never a real credential store. */
+export const staffCredentials: { user_id: string; password: string }[] = [
+  { user_id: "usr-cc-1", password: "customercare-2026" },
+];
+
+export const teamInvites: TeamInvite[] = [
+  {
+    id: uid("inv", 1),
+    email: "tolu.bankole@useveritasapp.com",
+    token: "demo-invite-tolu",
+    status: "pending",
+    invited_by: "usr-admin",
+    created_at: daysAgo(2),
+  },
 ];
 
 export const wallets: Wallet[] = users
