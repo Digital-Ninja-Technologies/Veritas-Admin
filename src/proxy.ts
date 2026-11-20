@@ -46,5 +46,8 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],
+  // /api is excluded: it's the public lead-intake surface the marketing site
+  // posts to, and must stay reachable without a session or a redirect to
+  // /login getting in the way of a JSON POST.
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
 };

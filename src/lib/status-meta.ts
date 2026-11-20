@@ -1,4 +1,12 @@
-import type { DisputeStatus, EscrowStatus, MilestoneStatus, SupportTicketStatus, TxType } from "@/lib/types";
+import type {
+  ContactMessageStatus,
+  DisputeStatus,
+  EscrowStatus,
+  MilestoneStatus,
+  SupportTicketStatus,
+  TxType,
+  VeripalApplicationStatus,
+} from "@/lib/types";
 
 export type BadgeTone = "success" | "warning" | "info" | "destructive" | "secondary";
 
@@ -31,6 +39,17 @@ export const supportStatusTone: Record<SupportTicketStatus, BadgeTone> = {
   open: "destructive",
   pending: "warning",
   closed: "success",
+};
+
+export const contactMessageStatusTone: Record<ContactMessageStatus, BadgeTone> = {
+  new: "info",
+  read: "secondary",
+};
+
+export const veripalApplicationStatusTone: Record<VeripalApplicationStatus, BadgeTone> = {
+  new: "info",
+  approved: "success",
+  rejected: "destructive",
 };
 
 export const txTypeTone: Record<TxType, BadgeTone> = {

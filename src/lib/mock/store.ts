@@ -1,4 +1,5 @@
 import {
+  contactMessages,
   disputes,
   escrows,
   faqs,
@@ -9,9 +10,11 @@ import {
   teamInvites,
   transactions,
   users,
+  veripalApplications,
   wallets,
 } from "./seed";
 import type {
+  ContactMessage,
   Dispute,
   Escrow,
   FaqEntry,
@@ -21,6 +24,7 @@ import type {
   TeamInvite,
   Transaction,
   User,
+  VeripalApplication,
   Wallet,
 } from "@/lib/types";
 
@@ -42,6 +46,8 @@ class MockStore {
   faqs: FaqEntry[] = structuredClone(faqs);
   teamInvites: TeamInvite[] = structuredClone(teamInvites);
   staffCredentials: { user_id: string; password: string }[] = structuredClone(staffCredentials);
+  contactMessages: ContactMessage[] = structuredClone(contactMessages);
+  veripalApplications: VeripalApplication[] = structuredClone(veripalApplications);
 }
 
 declare global {

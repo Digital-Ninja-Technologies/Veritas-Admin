@@ -10,6 +10,7 @@ import {
   Receipt,
   LifeBuoy,
   UserCog,
+  Inbox,
   LogOut,
 } from "lucide-react";
 
@@ -35,6 +36,7 @@ const SUPER_ADMIN_NAV = [
   { href: "/users", label: "Users", icon: Users },
   { href: "/transactions", label: "Transactions", icon: Receipt },
   { href: "/support", label: "Support", icon: LifeBuoy },
+  { href: "/leads", label: "Leads", icon: Inbox },
   { href: "/team", label: "Team", icon: UserCog },
 ];
 

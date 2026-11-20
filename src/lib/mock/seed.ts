@@ -1,4 +1,5 @@
 import type {
+  ContactMessage,
   Dispute,
   Escrow,
   FaqEntry,
@@ -8,6 +9,7 @@ import type {
   TeamInvite,
   Transaction,
   User,
+  VeripalApplication,
   Wallet,
 } from "@/lib/types";
 
@@ -567,4 +569,57 @@ export const faqs: FaqEntry[] = [
     "Yes, Veritas is available on iOS and Android. This admin dashboard is a separate, internal tool for the Veritas team only.",
     12,
   ),
+];
+
+/** Seeded from the marketing website's Contact and Veripals forms — see `lib/data/leads.ts`. */
+export const contactMessages: ContactMessage[] = [
+  {
+    id: uid("cmsg", 1),
+    name: "Barnabas Okon",
+    email: "barnabas@okonpartners.com",
+    message:
+      "Hi — we're a small agency looking to pay 6 overseas contractors monthly through escrow. Is there a way to batch-fund multiple milestones at once, or is it strictly one escrow per project?",
+    status: "new",
+    created_at: daysAgo(1),
+  },
+  {
+    id: uid("cmsg", 2),
+    name: "Sarah Ibe",
+    email: "sarah.ibe@gmail.com",
+    message: "Love the product. Quick question — do you support payouts to Kenyan M-Pesa yet, or just bank accounts?",
+    status: "read",
+    created_at: daysAgo(6),
+  },
+];
+
+/** Seeded from the marketing website's Veripals application form — see `lib/data/leads.ts`. */
+export const veripalApplications: VeripalApplication[] = [
+  {
+    id: uid("vpal", 1),
+    name: "Kemi Oduya",
+    email: "kemi.creates@gmail.com",
+    country: "Nigeria",
+    platform: "TikTok",
+    audience_size: "10k – 50k",
+    profile_url: "https://tiktok.com/@kemi.creates",
+    audience_country: "Nigeria, Ghana",
+    niche: "Design",
+    why: "I post process reels for design clients and get DMs weekly asking how to avoid getting ghosted after delivery. Would love to actually point them somewhere.",
+    status: "new",
+    created_at: daysAgo(2),
+  },
+  {
+    id: uid("vpal", 2),
+    name: "Marcus Webb",
+    email: "marcus@devtwitter.io",
+    country: "United Kingdom",
+    platform: "X / Twitter",
+    audience_size: "50k – 250k",
+    profile_url: "https://x.com/marcuswebb_dev",
+    audience_country: "UK, US, Nigeria",
+    niche: "Tech & dev",
+    why: "Freelance dev myself, built an audience writing about remote contract work. This is exactly the kind of tool my followers ask about.",
+    status: "approved",
+    created_at: daysAgo(9),
+  },
 ];

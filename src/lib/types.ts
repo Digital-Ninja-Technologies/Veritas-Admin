@@ -173,6 +173,36 @@ export interface TeamInvite {
   accepted_at?: string;
 }
 
+/** Submitted via the public Contact form on the marketing website. */
+export type ContactMessageStatus = "new" | "read";
+
+export interface ContactMessage {
+  id: string;
+  name: string;
+  email: string;
+  message: string;
+  status: ContactMessageStatus;
+  created_at: string;
+}
+
+/** Submitted via the Veripals (creator program) application form on the marketing website. */
+export type VeripalApplicationStatus = "new" | "approved" | "rejected";
+
+export interface VeripalApplication {
+  id: string;
+  name: string;
+  email: string;
+  country: string;
+  platform: string;
+  audience_size: string;
+  profile_url: string;
+  audience_country: string;
+  niche: string;
+  why?: string;
+  status: VeripalApplicationStatus;
+  created_at: string;
+}
+
 /**
  * View-model shapes the dashboard actually renders — denormalized with
  * party names so list/detail pages don't need N+1 user lookups. The mock
