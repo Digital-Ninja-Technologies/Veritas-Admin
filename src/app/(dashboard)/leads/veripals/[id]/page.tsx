@@ -76,11 +76,19 @@ export default async function VeripalApplicationPage({ params }: { params: Promi
               <p>{titleCase(application.niche)}</p>
             </div>
             <div>
-              <p className="text-xs uppercase tracking-wide text-muted-foreground">Profile</p>
+              <p className="text-xs uppercase tracking-wide text-muted-foreground">Profile{application.profile_url.includes(",") ? "s" : ""}</p>
               {application.profile_url ? (
-                <a href={application.profile_url} target="_blank" rel="noreferrer" className="break-all hover:underline">
-                  {application.profile_url}
-                </a>
+                <div className="flex flex-col gap-1">
+                  {application.profile_url
+                    .split(",")
+                    .map((url) => url.trim())
+                    .filter(Boolean)
+                    .map((url) => (
+                      <a key={url} href={url} target="_blank" rel="noreferrer" className="break-all hover:underline">
+                        {url}
+                      </a>
+                    ))}
+                </div>
               ) : (
                 <span className="text-muted-foreground">Not provided</span>
               )}
